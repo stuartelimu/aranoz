@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from taggit.managers import TaggableManager
 
 User = get_user_model()
 
@@ -18,6 +19,7 @@ class Item(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='products/')
     availability = models.CharField(max_length=2, choices=AVAILABILITY_CHOICES, default='IS')
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title
