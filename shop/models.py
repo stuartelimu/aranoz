@@ -1,3 +1,30 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+User = get_user_model()
+
+
+class Item(models.Model):
+
+    AVAILABILITY_CHOICES = [
+        ('IS', 'In Stock'),
+        ('OS', 'Out Of Stock')
+    ]
+
+    title = models.CharField(max_length=120)
+    price = models.FloatField()
+    slug = models.SlugField()
+    created = models.DateTimeField(auto_now_add=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='products/')
+    availability = models.CharField(max_length=2, choices=AVAILABILITY_CHOICES, default='IS')
+
+    def __str__(self):
+        return self.title
+
+
+class OrderItem(models.Model):
+    pass
+
+
+
