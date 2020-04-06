@@ -203,7 +203,7 @@
                             <div class="single_product_item">
                                 <img src="{{item.image.url}}" alt="">
                                 <div class="single_product_text">
-                                    <h4><a href="single-product.html">{{item.title}}</a></h4>
+                                    <h4><a href="{{ item.get_absolute_url }}">{{item.title}}</a></h4>
                                     <h3>${{item.price}}</h3>
                                     <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                 </div>

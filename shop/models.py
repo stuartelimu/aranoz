@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from taggit.managers import TaggableManager
 
@@ -23,6 +24,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('shop:item_detail', args=[self.slug])
 
 
 class OrderItem(models.Model):
