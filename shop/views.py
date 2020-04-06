@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import ListView, DetailView
 from shop.models import Item
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
-   
 
+   
 class ItemList(ListView):
     model = Item
     template_name = 'shop/category.html'
