@@ -17,6 +17,6 @@ def register(request):
             # TODO: send email to confirm account
             # return render(request, 'accounts/register_done.html', {'new_user': new_user})
             return redirect('login')
-        else:
-            user_form = UserRegistration()
-            return render(request, 'accounts/register.html', {'form': user_form})
+    else:
+        user_form = UserRegistration()
+        return render(request, 'accounts/register.html', {'form': user_form})
