@@ -205,7 +205,7 @@
                                 <div class="single_product_text">
                                     <h4><a href="{{ item.get_absolute_url }}">{{item.title}}</a></h4>
                                     <h3>${{item.price}}</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                    <a href="{% url 'shop:add_to_cart' item.slug %}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                 </div>
                             </div>
                         </div>
