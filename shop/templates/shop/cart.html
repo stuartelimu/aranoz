@@ -37,24 +37,25 @@
               </tr>
             </thead>
             <tbody>
+              {% for order_item in order.items.all %}
               <tr>
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img src="{% static 'img/product/single-product/cart-1.jpg' %}" alt="" />
+                      <img src="{{order_item.item.image.url}}" alt="" />
                     </div>
                     <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
+                      <p>{{order_item.item.title}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <h5>$360.00</h5>
+                  <h5>${{order_item.item.price}}</h5>
                 </td>
                 <td>
                   <div class="product_count">
                     <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
+                    <input class="input-number" type="text" value="{{order_item.quantity}}" min="1" max="10">
                     <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
                   </div>
                 </td>
@@ -62,6 +63,8 @@
                   <h5>$720.00</h5>
                 </td>
               </tr>
+              {% endfor %}
+
               <tr>
                 <td>
                   <div class="media">
