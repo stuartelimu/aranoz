@@ -39,3 +39,9 @@ def add_to_cart(request, slug):
         order = Order.objects.create(user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         return redirect("shop:item_detail", item.slug)
+
+
+class CartView(DetailView):
+    model = Order
+    template_name = 'shop/cart.html'
+    context_object_name = 'order'
