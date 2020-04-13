@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 
 from shop.models import Item, Order, OrderItem
 
@@ -41,7 +42,11 @@ def add_to_cart(request, slug):
         return redirect("shop:item_detail", item.slug)
 
 
-class CartView(DetailView):
-    model = Order
-    template_name = 'shop/cart.html'
-    context_object_name = 'order'
+class CartView(View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {'order': order}
+            return render(self.request, 'shop/cart.html', context=context)
+        except ObjectDoesNotExist:
+            return redirect('/')
