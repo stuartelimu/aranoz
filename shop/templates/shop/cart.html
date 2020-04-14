@@ -54,9 +54,9 @@
                 </td>
                 <td>
                   <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                    <a class="input-number-decrement"> <i class="ti-angle-down"></i></a>
                     <input class="input-number" type="text" value="{{order_item.quantity}}" min="1" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+                    <a href="{% url 'shop:add_single_item_to_cart' order_item.item.slug %}" class="input-number-increment"> <i class="ti-angle-up"></i></a>
                   </div>
                 </td>
                 <td>
