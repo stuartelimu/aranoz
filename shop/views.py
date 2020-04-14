@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from shop.models import Item, Order, OrderItem
 
@@ -18,6 +20,7 @@ class ItemDetail(DetailView):
     template_name = 'shop/single-product.html'
     context_object_name = 'item'
 
+@login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -42,7 +45,7 @@ def add_to_cart(request, slug):
         return redirect("shop:item_detail", item.slug)
 
 
-class CartView(View):
+class CartView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
